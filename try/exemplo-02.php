@@ -6,7 +6,6 @@
 		}
 
 		echo ucfirst($nome)."<br>";
-
 	}
 
 	try {
