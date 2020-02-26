@@ -14,7 +14,7 @@
 
       <!-- essa div eh onde vai aparecer -->
 
-      <div class="g-recaptcha" data-sitekey="6LenoNwUAAAAADZ0DWlyDTLUTr5QgYugclkUxZ0p"></div>
+      <div class="g-recaptcha" data-sitekey="GrandeChave"></div>
 
       <br/>
 
