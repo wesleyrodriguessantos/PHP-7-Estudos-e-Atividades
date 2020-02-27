@@ -4,7 +4,7 @@
 	$valor2 = $_POST['valorB'];
 	$valor3 = $_POST['valorC'];
 	$valor4 = $_POST['valorD'];
-
+	
 	$soma = $valor1 + $valor3;
 	$multiplicacao = $valor2 * $valor4;
 
