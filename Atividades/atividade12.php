@@ -7,7 +7,7 @@
 	for ($i = 0; $i < $valor1; $i++) { 
 		
 		echo $valor2;
-   		if($i != $valor2) echo " + ";
+   		if($i != $valor1) echo " + ";
 		
 	}
 	
