@@ -1,0 +1,10 @@
+/*Tamanho padrão para Tablets*/
+@media only screen and (max-width: 769px) {
+	.header-black ul {
+		display: none;
+	}
+}
+/*Tamanho padrão para smartphones*/
+@media only screen and (max-width: 480px) {
+
+}
