@@ -97,6 +97,9 @@
 				<hr>
 			</div>
 			
+			  <button type="button" id="btn-news-prev"><i class="fas fa-angle-left"></i></button>
+			  <button type="button" id="btn-news-next"><i class="fas fa-angle-right"></i></button>
+
 			<div class="row thumbnails owl-carousel owl-theme">
 				<div class="item">
 					<div class="item-inner">
@@ -222,7 +225,7 @@
 				
 				<div class="row">
 					
-					<div class="col-md-2 text-center">
+					<div class="col-md-2 text-center hidden-xs">
 						
 						<img class="logotipo" src="img/orlando-logo.png" alt="Logotipo">
 
@@ -230,7 +233,7 @@
 					<div class="col-md-10">
 						
 						<div class="row row-cols">
-							<div class="col-md-4 col-popular-post">
+							<div class="col-md-4 col-popular-post hidden-xs">
 								
 								<h4>POPULAR POSTS</h4>
 
@@ -247,7 +250,7 @@
 								</ul>
 
 							</div>
-							<div class="col-md-4 col-links">
+							<div class="col-md-4 col-links hidden-xs">
 								
 								<h4>LINKS</h4>
 
@@ -260,13 +263,22 @@
 							</div>
 							<div class="col-md-4 col-get-in-touch">
 								
-								<h4>GET IN TOUCH</h4>
+								<h4 class="hidden-xs">GET IN TOUCH</h4>
 
-								<address>
+								<address class="hidden-xs">
 									<i class="fas fa-map-marker-alt"></i><span>618 E. South Street, Suite 510<br/>Orlando, FL 32801</span>
 								</address>
 
-								<p><a href="tel:1855ORLANDOCITY"><i class="fas fa-phone"></i>1.855.ORL.CITY</a></p>
+								<p class="hidden-xs"><a href="tel:1855ORLANDOCITY"><i class="fas fa-phone"></i>1.855.ORL.CITY</a></p>
+
+								<div class="row-fluid visible-xs">
+									<div class="col-xs-6">
+										<a href="#" class="btn btn-footer"><i class="fa fa-map-marker-alt"></i>Location</a>
+									</div>
+									<div class="col-xs-6">
+										<a href="#" class="btn btn-footer"><i class="fa fa-phone"></i>Call</a>
+									</div>
+								</div>
 
 								<ul class="list-unstyled list-socials">
 									<li>
@@ -296,7 +308,7 @@
 
 		<div class="row row-cinza-escuro">
 			
-			<div class="container">
+			<div class="container copyright-mobile">
 				
 				<p class="pull-left">Copyright © Orlando City Soccer 2020. All rights reserved.</p>
 				<p class="pull-right text-roxo">Created by Wesley Rodrigues dos Santos in my computer</p>
