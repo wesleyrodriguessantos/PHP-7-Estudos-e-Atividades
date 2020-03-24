@@ -381,3 +381,6 @@ footer .list-socials i {
 video {
 	width: 60%;
 }
+#btn-bars, #btn-search, #btn-news-prev, #btn-news-next {
+	display: none;
+}
