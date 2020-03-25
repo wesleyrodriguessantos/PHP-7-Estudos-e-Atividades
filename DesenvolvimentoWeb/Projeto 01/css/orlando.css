@@ -274,14 +274,14 @@ footer {
 }
 footer .row {
 	width: 100%;
-	margin: 0;
+	margin-left: 0;
 }
 footer .row p {
 	line-height: 51px;
 	margin-bottom: 0;
 }
 footer .row-cinza-claro {
-	height: 200px;
+	height: 240px;
 	background-color: #171F26;
 }
 footer .row-cinza-escuro {
@@ -383,4 +383,7 @@ video {
 }
 #btn-bars, #btn-search, #btn-news-prev, #btn-news-next {
 	display: none;
+}
+.page-up {
+	display: none!important;
 }

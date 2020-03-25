@@ -44,4 +44,14 @@ $(document).ready(function(){
 
 			});
 
+			$("#page-up").on("click", function(event){
+
+				$("body").animate({
+					scrollTop:0
+				}, 1000);
+
+				event.preventDefault();
+
+			});
+
 		});

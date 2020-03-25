@@ -166,4 +166,12 @@
 	footer .hidden-sm-up {
 		margin-top: -10px;
 	}
+	header .header-black {
+		position: fixed;
+		top: 0;
+		width: 100%;
+	}
+	footer .page-up {
+		display: inline-block!important;
+	}
 }
