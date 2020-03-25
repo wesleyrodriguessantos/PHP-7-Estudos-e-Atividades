@@ -69,7 +69,10 @@ $(document).ready(function(){
 			$("#btn-search").on("click", function(){
 
 				$("header").toggleClass("open-search");
-				$("#input-search-mobile").focus();
+				//$("#input-search-mobile").focus();
+			}).on("click", function(){
+
+				$("#logotipo").toggleClass("efect");
 
 			});
 
