@@ -25,4 +25,13 @@ $app->get(
     }
 );
 
+$app->get(
+    '/shop.php',
+    function () {
+        
+        require_once("view/shop.php");
+        
+    }
+);
+
 $app->run();
