@@ -1,10 +1,10 @@
 <?php include_once("header.php"); ?>
 
 <section>
-	
+
 	<div class="container" id="destaque-produtos-container">
 		
-		<div id="destaque-produtos">
+		 <div id="destaque-produtos" class="owl-carousel owl-theme">
 		
 			<div class="item">
 				
@@ -110,32 +110,34 @@
 
 <?php include_once("footer.php"); ?>
 
-<script type="text/javascript">
-$(function () {
-	
-	$("#destaque-produtos").owlCarousel({
+<script type="text/javascript" src="js/efeitos.js"></script>
+<script>
+$(function(){
+$("#destaque-produtos").owlCarousel({
 
-		autoPlay: 5000,
-		items : 1,
-		singleItem: true;
+autoplay: 5000,
 
-	});
+items : 1,
 
-	var owlDestaque = $("#destaque-produtos").data('owlCarousel');
-
-	$('#btn-destaque-prev').on("click", function(){
-
-		owlDestaque.prev();
-
-	});
-
-	$('#btn-destaque-next').on("click", function(){
-
-		owlDestaque.next();
-
-	});
+singleItem: true
 
 });
 
+var owl = $("#destaque-produtos");
+
+owl.owlCarousel();
+
+$('#btn-destaque-prev').on("click", function(){
+
+owl.trigger('prev.owl.carousel');
+
+});
+
+$('#btn-destaque-next').on("click", function(){
+
+owl.trigger('next.owl.carousel');
+
+});
+});
 
 </script>
