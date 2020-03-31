@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="lib/owl-carousel/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="lib/owl-carousel/owl.theme.css">
 	<link rel="stylesheet" type="text/css" href="fonts/fontawesome-free-5.12.1-web/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/raty/lib/jquery.raty.css">
 	<link rel="stylesheet" type="text/css" href="css/orlando.css">
 	<link rel="stylesheet" type="text/css" href="css/orlando-mobile.css">
 

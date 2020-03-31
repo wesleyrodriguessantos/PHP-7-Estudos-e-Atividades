@@ -104,6 +104,81 @@
 			</div>
 		</div>
 
+	</div>
+
+	<div id="mais-buscados" class="container">
+
+		<div class="row text-center title-default-roxo">
+			<h2 style="color: #5E2799;
+			font-family: 'OpenSans-Light';
+ 		   	font-size: 48px;
+    		text-transform: uppercase;
+    		text-align: center;">Os mais buscados</h2>
+			<hr style="border: #FDE192 solid 8px;
+			width: 200px;
+    		margin: 0 auto;">			
+		</div>
+
+		<div class="row">
+			
+			<div class="col-md-3">
+				<div class="box-produto-info">
+					<a href="#">
+						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
+						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
+						<div class="estrelas" data-score="3"></div>
+						<div class="text-qtd-reviews text-arial-cinza">(354)</div>
+						<div class="text-valor text-roxo">R$ 109,90</div>
+						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
+					</a>
+				</div>
+
+			</div>
+			
+			<div class="col-md-3">
+				<div class="box-produto-info">
+					<a href="#">
+						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
+						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
+						<div class="estrelas" data-score="2.5"></div>
+						<div class="text-qtd-reviews text-arial-cinza">(450)</div>
+						<div class="text-valor text-roxo">R$ 109,90</div>
+						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="col-md-3">
+				<div class="box-produto-info">
+					<a href="#">
+						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
+						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
+						<div class="estrelas" data-score="4"></div>
+						<div class="text-qtd-reviews text-arial-cinza">(210)</div>
+						<div class="text-valor text-roxo">R$ 109,90</div>
+						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="col-md-3">
+				<div class="box-produto-info">
+					<a href="#">
+						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
+						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
+						<div class="estrelas" data-score="3.5"></div>
+						<div class="text-qtd-reviews text-arial-cinza">(342)</div>
+						<div class="text-valor text-roxo">R$ 109,90</div>
+						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
+					</a>
+				</div>
+
+			</div>
+
+		</div>
+		
 	</div>				
 
 </section>
@@ -113,31 +188,43 @@
 <script type="text/javascript" src="js/efeitos.js"></script>
 <script>
 $(function(){
-$("#destaque-produtos").owlCarousel({
+	$("#destaque-produtos").owlCarousel({
 
-autoplay: 5000,
+	autoplay: 5000,
 
-items : 1,
+	items : 1,
 
-singleItem: true
+	singleItem: true
 
-});
+	});
 
-var owl = $("#destaque-produtos");
+	var owl = $("#destaque-produtos");
 
-owl.owlCarousel();
+	owl.owlCarousel();
 
-$('#btn-destaque-prev').on("click", function(){
+	$('#btn-destaque-prev').on("click", function(){
 
-owl.trigger('prev.owl.carousel');
+	owl.trigger('prev.owl.carousel');
 
-});
+	});
 
-$('#btn-destaque-next').on("click", function(){
+	$('#btn-destaque-next').on("click", function(){
 
-owl.trigger('next.owl.carousel');
+	owl.trigger('next.owl.carousel');
 
-});
+	});
+
+	$('.estrelas').each(function(){
+
+		$(this).raty({
+			starHalf	: 'lib/raty/lib/images/star-half.png',
+			starOff		: 'lib/raty/lib/images/star-off.png',
+			starOn		: 'lib/raty/lib/images/star-on.png',
+			score		: parseFloat($(this).data("score"))
+		});
+
+	});
+
 });
 
 </script>
