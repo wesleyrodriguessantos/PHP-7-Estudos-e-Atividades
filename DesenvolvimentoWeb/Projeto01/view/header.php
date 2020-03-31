@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" ng-app="shop">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="lib/raty/lib/jquery.raty.css">
 	<link rel="stylesheet" type="text/css" href="css/orlando.css">
 	<link rel="stylesheet" type="text/css" href="css/orlando-mobile.css">
+
+	<script src="lib/angularjs/angular.min.js"></script>
 
 </head>
 <body>
