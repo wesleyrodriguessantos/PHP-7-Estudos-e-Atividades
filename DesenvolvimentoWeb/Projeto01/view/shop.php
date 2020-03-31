@@ -8,8 +8,8 @@
 		
 			<div class="item" ng-repeat="produto in produtos">
 				
-				<div class="col-sm-6 col-imagem">
-					<img src="img/produtos/{{produto.foto_principal}}" alt="{{produto.nome_prod_longo}}">
+				<div style="text-align: center;" class="col-sm-6 col-imagem">
+					<img style="max-width: 100%; max-height: 250px;" src="img/produtos/{{produto.foto_principal}}" alt="{{produto.nome_prod_longo}}">
 				</div>		
 				<div class="col-sm-6 col-descricao">
 					<h2>{{produto.nome_prod_longo}}</h2>
@@ -164,51 +164,25 @@
 </section>
 
 <?php include_once("footer.php"); ?>
-
+<script type="text/javascript" src="js/efeitos.js"></script>
 <script>
-angular.module("shop", []).controller("destaque-controller", function($scope){
+angular.module("shop", []).controller("destaque-controller", function($scope, $http){
 
 	$scope.produtos = [];
 
-	$scope.produtos.push({
-		nome_prod_longo:"Smartphone Motorola Moto X Play Dual Chip Desbloqueado Andoid 5.1",
-		foto_principal:"moto-x.png",
-		preco:"1.259",
-		centavos:"10",
-		parcelas:8,
-		parcela:"174,88",
-		total:"1.399,00"
-	});	
+	var initCarousel = function(){
 
-	$scope.produtos.push({
-		nome_prod_longo:"Iphone",
-		foto_principal:"moto-x.png",
-		preco:"1.259",
-		centavos:"10",
-		parcelas:8,
-		parcela:"174,88",
-		total:"1.399,00"
-	});	
+		$("#destaque-produtos").owlCarousel({
+	 
+	      autoPlay: 5000,
+	      items : 1,
+	      singleItem: true
+	 
+	  	});
 
-});
-</script>
+	var owl = $("#destaque-produtos").data('owlCarousel');
 
-<script type="text/javascript" src="js/efeitos.js"></script>
-<script>
-$(function(){
-	$("#destaque-produtos").owlCarousel({
-
-	autoplay: 5000,
-
-	items : 1,
-
-	singleItem: true
-
-	});
-
-	var owl = $("#destaque-produtos");
-
-	owl.owlCarousel();
+	//owl.owlCarousel();
 
 	$('#btn-destaque-prev').on("click", function(){
 
@@ -221,6 +195,23 @@ $(function(){
 	owl.trigger('next.owl.carousel');
 
 	});
+	};
+
+	$http({
+	  method: 'GET',
+	  url: 'produtos'
+	}).then(function successCallback(response) {
+
+	    $scope.produtos = response.data;
+
+	    setTimeout(initCarousel, 1000);
+
+	  }, function errorCallback(response) {
+	    // called asynchronously if an error occurs
+	    // or server returns response with an error status.
+	  });
+
+});
 
 	$('.estrelas').each(function(){
 
@@ -232,7 +223,5 @@ $(function(){
 		});
 
 	});
-
-});
 
 </script>

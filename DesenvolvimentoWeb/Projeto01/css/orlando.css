@@ -402,6 +402,13 @@ video {
 #destaque-produtos .col-imagem {
 	text-align: center;
 }
+#destaque-produtos .col-imagem img {
+	max-width: 100%;
+	max-height: 250px;
+}
+#destaque-produtos .item {
+	display: inline-block;
+}
 #destaque-produtos {
 	margin: 30px auto;
 }
