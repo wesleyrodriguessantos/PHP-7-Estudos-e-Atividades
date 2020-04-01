@@ -1,8 +1,8 @@
 <?php include_once("header.php"); ?>
 
-<section>
+<section ng-controller="destaque-controller">
 
-	<div class="container" id="destaque-produtos-container" ng-controller="destaque-controller">
+	<div class="container" id="destaque-produtos-container">
 		
 		 <div id="destaque-produtos" class="owl-carousel owl-theme">
 		
@@ -101,58 +101,17 @@
 
 		<div class="row">
 			
-			<div class="col-md-3">
+			<div class="col-md-3" ng-repeat="produto in buscados">
 				<div class="box-produto-info">
 					<a href="#">
-						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
-						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
-						<div class="text-valor text-roxo">R$ 109,90</div>
-						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
+						<img src="img/produtos/{{produto.foto_principal}}" alt="{{produto.nome_prod_longo}}" class="produto-img">
+						<h3>{{produto.nome_prod_longo}}</h3>
+						<!-- As estrelas dentro dessa Tag a ficam incorrentas, pois ao clicar nas mesmas, somos redirecionados para a páginas que a tag a está apontando, por isso coloquei elas fora da Tag a -->
+						<div class="text-valor text-roxo">R$ {{produto.total}}</div>
+						<div class="text-parcelado text-arial-cinza">{{produto.parcelas}}x de R$ {{produto.parcela}} sem juros</div>
 					</a>
-					<div class="estrelas" data-score="3"></div>
-					<div class="text-qtd-reviews text-arial-cinza">(354)</div>
-				</div>
-
-			</div>
-			
-			<div class="col-md-3">
-				<div class="box-produto-info">
-					<a href="#">
-						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
-						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
-						<div class="text-valor text-roxo">R$ 109,90</div>
-						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
-					</a>
-					<div class="estrelas" data-score="2.5"></div>
-					<div class="text-qtd-reviews text-arial-cinza">(450)</div>
-				</div>
-
-			</div>
-
-			<div class="col-md-3">
-				<div class="box-produto-info">
-					<a href="#">
-						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
-						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
-						<div class="text-valor text-roxo">R$ 109,90</div>
-						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
-					</a>
-					<div class="estrelas" data-score="4"></div>
-					<div class="text-qtd-reviews text-arial-cinza">(210)</div>
-				</div>
-
-			</div>
-
-			<div class="col-md-3">
-				<div class="box-produto-info">
-					<a href="#">
-						<img src="img/produtos/panelas.png" alt="Panelas" class="produto-img">
-						<h3>Conjunto de Panelas Tramontina Versalhes Alumínio Antiaderente 5</h3>
-						<div class="text-valor text-roxo">R$ 109,90</div>
-						<div class="text-parcelado text-arial-cinza">10x de R$ 10,99 sem Juros</div>
-					</a>
-					<div class="estrelas" data-score="3.5"></div>
-					<div class="text-qtd-reviews text-arial-cinza">(342)</div>
+					<div class="estrelas" data-score="{{produto.media}}"></div>
+					<div class="text-qtd-reviews text-arial-cinza">({{produto.total_reviews}})</div>
 				</div>
 
 			</div>
@@ -169,6 +128,7 @@
 angular.module("shop", []).controller("destaque-controller", function($scope, $http){
 
 	$scope.produtos = [];
+	$scope.buscados = [];
 
 	var initCarousel = function(){
 
@@ -211,17 +171,34 @@ angular.module("shop", []).controller("destaque-controller", function($scope, $h
 	    // or server returns response with an error status.
 	  });
 
+	var initEstrelas = function(){
+
+		$('.estrelas').each(function(){
+
+	  		$(this).raty({
+		  		starHalf    : 'lib/raty/lib/images/star-half.png',                                // The name of the half star image.
+				starOff     : 'lib/raty/lib/images/star-off.png',                                 // Name of the star image off.
+				starOn      : 'lib/raty/lib/images/star-on.png',
+				score		: parseFloat($(this).data("score"))
+		  	});
+
+	  	});
+
+	};
+
+	$http({
+	  method: 'GET',
+	  url: 'produtos-mais-buscados'
+	}).then(function successCallback(response) {
+
+	    $scope.buscados = response.data;
+
+	    setTimeout(initEstrelas, 1000);
+
+	  }, function errorCallback(response) {
+	    // called asynchronously if an error occurs
+	    // or server returns response with an error status.
+	  });	
+
 });
-
-	$('.estrelas').each(function(){
-
-		$(this).raty({
-			starHalf	: 'lib/raty/lib/images/star-half.png',
-			starOff		: 'lib/raty/lib/images/star-off.png',
-			starOn		: 'lib/raty/lib/images/star-on.png',
-			score		: parseFloat($(this).data("score"))
-		});
-
-	});
-
 </script>
