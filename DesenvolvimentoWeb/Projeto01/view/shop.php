@@ -9,7 +9,9 @@
 			<div class="item" ng-repeat="produto in produtos">
 				
 				<div style="text-align: center;" class="col-sm-6 col-imagem">
-					<img style="max-width: 100%; max-height: 250px;" src="img/produtos/{{produto.foto_principal}}" alt="{{produto.nome_prod_longo}}">
+					<a href="produto-{{produto.id_prod}}">
+						<img style="max-width: 100%; max-height: 250px;" src="img/produtos/{{produto.foto_principal}}" alt="{{produto.nome_prod_longo}}">
+				</a>
 				</div>		
 				<div class="col-sm-6 col-descricao">
 					<h2>{{produto.nome_prod_longo}}</h2>
@@ -17,7 +19,7 @@
 						<div class="text-noboleto text-arial-cinza">no boleto</div>
 						<div class="text-por text-arial-cinza">por</div>
 						<div class="text-reais text-roxo">R$</div>
-							<div class="text-valor text-roxo">{{produto.preco}}</div>
+						<div class="text-valor text-roxo">{{produto.preco}}</div>
 						<div class="text-valor-centavos text-roxo">,{{produto.centavos}}</div>
 						<div class="text-parcelas text-arial-cinza">ou em até {{produto.parcelas}}x de R$ {{produto.parcela}}</div>
 						<div class="text-total text-arial-cinza">total a prazo R$ {{produto.total}}</div>
@@ -103,7 +105,7 @@
 			
 			<div class="col-md-3" ng-repeat="produto in buscados">
 				<div class="box-produto-info">
-					<a href="#">
+					<a href="produto-{{produto.id_prod}}">
 						<img src="img/produtos/{{produto.foto_principal}}" alt="{{produto.nome_prod_longo}}" class="produto-img">
 						<h3>{{produto.nome_prod_longo}}</h3>
 						<!-- As estrelas dentro dessa Tag a ficam incorrentas, pois ao clicar nas mesmas, somos redirecionados para a páginas que a tag a está apontando, por isso coloquei elas fora da Tag a -->
@@ -199,6 +201,69 @@ angular.module("shop", []).controller("destaque-controller", function($scope, $h
 	    // called asynchronously if an error occurs
 	    // or server returns response with an error status.
 	  });	
+
+});
+
+angular.module("shop", []).controller("destaque-controller", function($scope, $http){
+
+	$scope.produtos = [];
+	$scope.buscados = [];
+
+	var initCarousel = function(){
+
+		$("#destaque-produtos").owlCarousel({
+	 
+	      autoPlay: 5000,
+	      items : 1,
+	      singleItem: true
+	 
+	  	});
+
+	var owl = $("#destaque-produtos").data('owlCarousel');
+
+	//owl.owlCarousel();
+
+	$('#btn-destaque-prev').on("click", function(){
+
+	owl.trigger('prev.owl.carousel');
+
+	});
+
+	$('#btn-destaque-next').on("click", function(){
+
+	owl.trigger('next.owl.carousel');
+
+	});
+
+	};
+
+	$http({
+	  method: 'GET',
+	  url: 'produtos'
+	}).then(function successCallback(response) {
+
+	    $scope.produtos = response.data;
+
+	    setTimeout(initCarousel, 1000);
+
+	  }, function errorCallback(response) {
+	    // called asynchronously if an error occurs
+	    // or server returns response with an error status.
+	  });
+
+	$http({
+	  method: 'GET',
+	  url: 'produtos-mais-buscados'
+	}).then(function successCallback(response) {
+
+	    $scope.buscados = response.data;
+
+	  }, function errorCallback(response) {
+	    // called asynchronously if an error occurs
+	    // or server returns response with an error status.
+	  });
+
+	
 
 });
 </script>
