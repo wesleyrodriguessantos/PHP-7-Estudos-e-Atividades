@@ -1,6 +1,6 @@
 <?php include_once("header.php");?>
 
-<section  ng-controller="cart-controller">
+<section ng-controller="cart-controller">
 	
 	<div class="container">
 
@@ -33,7 +33,7 @@
 					      <span class="input-group-btn">
 					        <button class="btn text-roxo" ng-click="addQtd(produto)" type="button"><i class="fa fa-chevron-down"></i></button>
 					      </span>
-					      <input type="text" class="form-control" ng-model="produto.qtd">
+					      <input type="text" class="form-control" ng-model="produto.qtd_car">
 					      <span class="input-group-btn">
 					        <button class="btn text-roxo" ng-click="removeQtd(produto)" type="button"><i class="fa fa-chevron-up"></i></button>
 					      </span>
@@ -45,7 +45,7 @@
 					</td>
 					<td class="text-center">R$ {{produto.preco}}</td>
 					<td class="text-center">R$ {{produto.total}}</td>
-					<td class="text-center"><button class="btn text-roxo" type="button"><i class="fas fa-times"></i></button></td>
+					<td class="text-center"><button ng-click="removeAll(produto)" class="btn text-roxo" type="button"><i class="fas fa-times"></i></button></td>
 				</tr>
 			</tbody>
 		</table>
@@ -100,7 +100,14 @@ angular.module("shop", []).controller("cart-controller", function($scope, $http)
 			url:'carrinho-dados'
 		}).then(function(response){
 
-			console.log(response);
+			$scope.carrinho = {
+				cep:response.data.cep_car,
+				subtotal:response.data.subtotal_car,
+				frete:response.data.frete_car,
+				total:response.data.total_car
+			};
+
+			$scope.produtos = response.data.produtos;
 
 		}, function(response){
 
@@ -109,31 +116,6 @@ angular.module("shop", []).controller("cart-controller", function($scope, $http)
 		});
 
 	};
-
-	$scope.carrinho = {
-		cep:'01310-100',
-		subtotal:'1.110,00',
-		frete:'0,00',
-		total:'1.110,00'
-	};
-
-	$scope.produtos = [{
-		nome_prod_long:'Smartphone Motorola Moto X Play Dual',
-		preco:'1.500,99',
-		total:'1.500,99',
-		qtd:1,
-		foto_principal:'iphone.jpg',
-		prazo:'11 dias úteis',
-		id_prod:1
-	},{
-		nome_prod_long:'Smartphone Motorola Moto X Play Dual',
-		preco:'1.500,99',
-		total:'1.500,99',
-		qtd:1,
-		foto_principal:'iphone.jpg',
-		prazo:'10 dias úteis',
-		id_prod:2
-	}];
 
 	$scope.addQtd = function(_produto){
 
@@ -160,6 +142,25 @@ angular.module("shop", []).controller("cart-controller", function($scope, $http)
 
 
 	};
+
+	$scope.removeAll = function(_produto){
+
+		$http({
+			method:'DELETE',
+			url:'carrinhoRemoveAll-'+_produto.id_prod
+		}).then(function(response){
+
+			carregarCarrinho();
+
+		}, function(){
+
+
+
+		});
+
+	};
+
+	carregarCarrinho();
 
 });
 </script>

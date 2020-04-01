@@ -173,7 +173,7 @@ angular.module("shop", []).controller("destaque-controller", function($scope, $h
 	    // or server returns response with an error status.
 	  });
 
-	var initEstrelas = function(){
+		var initEstrelas = function(){
 
 		$('.estrelas').each(function(){
 
@@ -200,70 +200,10 @@ angular.module("shop", []).controller("destaque-controller", function($scope, $h
 	  }, function errorCallback(response) {
 	    // called asynchronously if an error occurs
 	    // or server returns response with an error status.
-	  });	
-
-});
-
-angular.module("shop", []).controller("destaque-controller", function($scope, $http){
-
-	$scope.produtos = [];
-	$scope.buscados = [];
-
-	var initCarousel = function(){
-
-		$("#destaque-produtos").owlCarousel({
-	 
-	      autoPlay: 5000,
-	      items : 1,
-	      singleItem: true
-	 
-	  	});
-
-	var owl = $("#destaque-produtos").data('owlCarousel');
-
-	//owl.owlCarousel();
-
-	$('#btn-destaque-prev').on("click", function(){
-
-	owl.trigger('prev.owl.carousel');
-
-	});
-
-	$('#btn-destaque-next').on("click", function(){
-
-	owl.trigger('next.owl.carousel');
-
-	});
-
-	};
-
-	$http({
-	  method: 'GET',
-	  url: 'produtos'
-	}).then(function successCallback(response) {
-
-	    $scope.produtos = response.data;
-
-	    setTimeout(initCarousel, 1000);
-
-	  }, function errorCallback(response) {
-	    // called asynchronously if an error occurs
-	    // or server returns response with an error status.
-	  });
-
-	$http({
-	  method: 'GET',
-	  url: 'produtos-mais-buscados'
-	}).then(function successCallback(response) {
-
-	    $scope.buscados = response.data;
-
-	  }, function errorCallback(response) {
-	    // called asynchronously if an error occurs
-	    // or server returns response with an error status.
 	  });
 
 	
 
 });
+
 </script>
