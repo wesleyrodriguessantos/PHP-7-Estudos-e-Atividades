@@ -193,4 +193,106 @@ $app->delete("/carrinhoRemoveAll-:id_prod", function($id_prod){
 
 });
 
+$app->post("/carrinho-produto", function(){
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $sql = new Sql();
+
+    $result = $sql->select("CALL sp_carrinhos_get('".session_id()."')");
+
+    $carrinho = $result[0];
+
+    $sql = new Sql();
+
+    $sql->query("CALL sp_carrinhosprodutos_add(".$carrinho['id_car'].", ".$data['id_prod'].")");
+
+    echo json_encode(array(
+        "success"=>true
+    ));
+
+});
+
+$app->delete("/carrinho-produto", function(){
+
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $sql = new Sql();
+
+    $result = $sql->select("CALL sp_carrinhos_get('".session_id()."')");
+
+    $carrinho = $result[0];
+
+    $sql = new Sql();
+
+    $sql->query("CALL sp_carrinhosprodutos_rem(".$carrinho['id_car'].", ".$data['id_prod'].")");
+
+    echo json_encode(array(
+        "success"=>true
+    ));
+
+});
+
+$app->get("/calcular-frete-:cep", function($cep){
+
+    require_once("inc/php-calculo-frete-master/frete.php");
+
+    $sql = new Sql();
+
+    $result = $sql->select("CALL sp_carrinhos_get('".session_id()."')");
+
+    $carrinho = $result[0];
+
+    $sql = new Sql();
+
+    $produtos = $sql->select("CALL sp_carrinhosprodutosfrete_list(".$carrinho['id_car'].")");
+
+    $peso = 0; 
+    $comprimento = 0;
+    $altura = 0;
+    $largura = 0;
+    $valor = 0;
+
+    foreach ($produtos as $produto) {
+        $peso =+ $produto['peso'];
+        $comprimento =+ $produto['5'];
+        $altura =+ $produto['altura'];
+        $largura =+ $produto['largura'];
+        $valor =+ $produto['preco'];
+    }
+
+    if ($altura < 2) $altura = 2;
+    if ($comprimento < 16) $comprimento = 16;
+    if ($largura < 11) $largura = 11;
+
+    $cep = trim(str_replace('-', '', $cep));
+
+    $frete = new Frete(
+        $cepDeOrigem = '01418100', 
+        $cepDeDestino = $cep, 
+        $peso, 
+        $comprimento, 
+        $altura, 
+        $largura, 
+        $valor
+    );
+
+
+    $sql = new Sql();
+
+    $sql->query("
+        UPDATE tb_carrinhos 
+        SET 
+            cep_car = '".$cep."', 
+            frete_car = ".$frete->getValor().",
+            prazo_car = ".$frete->getPrazoEntrega()."
+        WHERE id_car = ".$carrinho['id_car']
+    );
+
+    echo json_encode(array(
+        'success'=>true
+    ));
+
+});
+
 $app->run();
