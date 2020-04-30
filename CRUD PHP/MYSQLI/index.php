@@ -9,6 +9,8 @@
     
 <?php
     include("Class/ClassConexao.php");
+    include("Class/ClassCrud.php");
+
 ?>
 
 </body>
