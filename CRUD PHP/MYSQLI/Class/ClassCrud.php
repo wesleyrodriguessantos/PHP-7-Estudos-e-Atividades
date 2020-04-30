@@ -1,5 +1,7 @@
 <?php
 
+include ("ClassConexao.php");
+
 class ClassCrud extends ClassConexao{
 
 #Atributos
@@ -29,5 +31,11 @@ private function preparedStatements($query, $tipos , $parametros)
 private function countParametros($parametros)
 {
     $this->contador=count($parametros);
+}
+
+#Método de Inserção
+public function insertDB($tabela , $condicao , $tipos , $parametros){
+    $this->preparedStatements("insert into {$tabela} values ({$condicao})" , $tipos , $parametros);
+    return $this->crud;
 }
 }
