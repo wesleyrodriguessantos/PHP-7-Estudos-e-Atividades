@@ -1,6 +1,7 @@
 <?php
 
-include ("ClassConexao.php");
+include ("../Class/ClassCrud.php");
+include ("../Class/ClassConexao.php");
 
 class ClassCrud extends ClassConexao {
 
@@ -36,5 +37,11 @@ class ClassCrud extends ClassConexao {
     {
         $this->preparedStatements("INSERT INTO {$tabela} VALUES ({$condicao})", $parametros);
         return $this->crud;
+    }
+
+    #Seleção no Banco de Dados
+    public function selectDB($Campos , $Tabela , $Condicao , $Parametros){
+        $this->preparedStatements("select {$Campos} from {$Tabela} {$Condicao}",$Parametros);
+        return $this->Crud;
     }
 }
