@@ -19,4 +19,11 @@ SELECT nome, nacionalidade from gafanhotos where sexo = 'M' AND nacionalidade <>
 SELECT max(altura) from gafanhotos where sexo = 'M' and nacionalidade = 'Brasil';
 
 /* Qual é a média de peso dos gafanhotos cadastrados? */
+SELECT avg(peso) from gafanhotos;
 
+/* Qual é o menor peso entre as gafanhotas mulheres que nasceram fora do Brasil e entre 01/jan/19990 e 31/dez/2000? */
+SELECT min(peso) from gafanhotos where sexo = 'F' AND nacionalidade != 'Brasil' and nascimento between '19990-01-01' and '2000-12-31';
+
+
+/* Quantas gafanhotos mulheres tem mais de 1.90m de Altura? */
+select count(altura) from gafanhotos where sexo = 'F' AND altura > '1.90';
