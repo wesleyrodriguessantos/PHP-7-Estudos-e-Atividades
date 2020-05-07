@@ -43,7 +43,15 @@ $cmd->bindValue(":id", 2);
 $cmd->execute();*/
 
 //2ª Maneira - Usando Query
-$res = $pdo->query("UPDATE pessoa SET email = 'Rosangeladias@hotmail.com' WHERE id = '3'");
+//$res = $pdo->query("UPDATE pessoa SET email = 'Rosangeladias@hotmail.com' WHERE id = '3'");
 
+//-----------------------------SELECT---------------------------------------------------
+$cmd = $pdo->prepare("SELECT * FROM pessoa WHERE id = :id");
+$cmd->bindValue(":id", 2);
+$cmd->execute();
+$resultado = $cmd->fetch(PDO::FETCH_ASSOC);
 
+foreach ($resultado as $key => $value) {
+    echo $key . ": " . $value . "<br>";
+}
 ?>
