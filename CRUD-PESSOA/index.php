@@ -12,15 +12,30 @@ $p = new Pessoa("crudpdo","localhost","root","");
     <link rel="stylesheet" href="estilo.css" >
 </head>
 <body>
+    <?php
+        if (isset($_POST['nome']))
+        {
+            $nome = addslashes($_POST['nome']);
+            $telefone = addslashes($_POST['telefone']);
+            $email = addslashes($_POST['email']);
+            
+            if (!$p->cadastrarPessoa($nome, $telefone, $email))
+            {
+                echo "Email já está Cadastrado!";
+            }
+        
+        }
+
+    ?>
     <section id="esquerda">
-    <form>
+    <form method="POST">
             <h2>CADASTRAR PESSOA</h2>
             <label for="nome">NOME</label>
-            <input type="text" name="nome" id="nome">
+            <input type="text" name="nome" id="nome" required>
             <label for="telefone">TELEFONE</label>
-            <input type="text" name="telefone" id="telefone">
+            <input type="text" name="telefone" id="telefone" required>
             <label for="email">EMAIL</label>
-            <input type="text" name="email" id="email">
+            <input type="email" name="email" id="email" required>
             <input type="submit" value="Cadastrar">
         </form>
     </section>
@@ -36,7 +51,7 @@ $p = new Pessoa("crudpdo","localhost","root","");
         <?php
             $dados = $p->buscarDados();
             
-            if (count($dados) > 0) 
+            if (count($dados) > 0) //TEM PESSOAS CADASTRADAS NO BANCO DE DADOS
             {
                 for ($i=0; $i < count($dados); $i++) { 
                     echo "<tr>";
@@ -52,6 +67,9 @@ $p = new Pessoa("crudpdo","localhost","root","");
             <?php
                     echo "</tr>";
                 }
+            } else //Não existe cadastro no Banco de Dados
+            {
+                echo "Ainda não há Pessoas Cdastradas!";
             }
             ?>   
         </table>

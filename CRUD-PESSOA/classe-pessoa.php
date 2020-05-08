@@ -30,5 +30,28 @@ Class Pessoa {
         $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
+
+    //Função para Cadastrar pessoas no Banco de Dados
+    public function cadastrarPessoa ($nome, $telefone, $email)
+    {
+        //ANTES DE CADASTRAR, PRECISAMOS VERIFICAR O EMAIL SE JÁ NÃO FOI CADASTRADO ANTES
+        $cmd = $this->pdo->prepare("SELECT id FROM pessoa Where email = :e");
+        $cmd->bindValue(":e", $email);
+        $cmd->execute();
+
+        if($cmd->rowCount() > 0) //Email já existe no Banco
+        {
+            return false;
+        } else //Não foi encontrado o email correrspondente 
+        {
+            $cmd = $this->pdo->prepare("INSERT INTO pessoa (nome, telefone, email) VALUES (:n, :t, :e)");
+            $cmd->bindValue(":n", $nome);
+            $cmd->bindValue(":t", $telefone);
+            $cmd->bindValue(":e", $email);
+            $cmd->execute();
+            return true;
+
+        }
+    }
 }
 ?>
