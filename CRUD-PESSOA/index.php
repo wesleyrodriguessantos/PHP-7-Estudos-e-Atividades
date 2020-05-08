@@ -1,3 +1,8 @@
+<?php
+require_once 'classe-pessoa.php';
+$p = new Pessoa("crudpdo","localhost","root","");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,18 +25,35 @@
         </form>
     </section>
     <section id="direita">
-        <table>
+
+    <table>
             <tr id="titulo">
                 <td>Nome</td>
                 <td>Telefone</td>
                 <td colspan="2">Email</td>
             </tr>
-            <tr>
-                <td>Joelma</td>
-                <td>5236363636</td>
-                <td>Joelma5656@gmail.com</td>
-                <td><a href="#">Editar</a><a href="#">Excluir</a></td>
-            </tr>
+
+        <?php
+            $dados = $p->buscarDados();
+            
+            if (count($dados) > 0) 
+            {
+                for ($i=0; $i < count($dados); $i++) { 
+                    echo "<tr>";
+                    foreach ($dados[$i] as $k => $v) 
+                    {
+                        if($k != "id") 
+                        {
+                            echo "<td>".$v."</td>";   
+                        }
+                    }
+        ?>
+                    <td><a href="#">Editar</a><a href="#">Excluir</a></td>
+            <?php
+                    echo "</tr>";
+                }
+            }
+            ?>   
         </table>
     </section>
     
