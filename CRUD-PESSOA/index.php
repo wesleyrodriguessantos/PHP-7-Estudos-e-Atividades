@@ -13,16 +13,38 @@ $p = new Pessoa("crudpdo","localhost","root","");
 </head>
 <body>
     <?php
-        if (isset($_POST['nome']))
+        if (isset($_POST['nome'])) //CLICOU NO BOTÃO CADASTRAR OU EDITAR
         {
-            $nome = addslashes($_POST['nome']);
-            $telefone = addslashes($_POST['telefone']);
-            $email = addslashes($_POST['email']);
-            
-            if (!$p->cadastrarPessoa($nome, $telefone, $email))
-            {
-                echo "Email já está Cadastrado!";
-            }
+                //------------------------EDITAR------------------------
+                if (isset($_GET['id_up']) && !empty($_GET['id_up'])) {
+
+                    $id_update = addslashes($_GET['id_up']);
+                    $nome = addslashes($_POST['nome']);
+                    $telefone = addslashes($_POST['telefone']);
+                    $email = addslashes($_POST['email']);
+                    
+                    $p->atualizarDados($id_update, $nome, $telefone, $email);
+                    header("location: index.php");
+                
+                } //------------------------CADASTRAR------------------------
+                else  
+                {
+                    $nome = addslashes($_POST['nome']);
+                    $telefone = addslashes($_POST['telefone']);
+                    $email = addslashes($_POST['email']);
+                    
+                    if (!$p->cadastrarPessoa($nome, $telefone, $email))
+                    {
+                        ?>
+                        <div class="aviso" style="width: 90%; height: 50px; margin: 30px auto 0px auto;">
+                            <img src="aviso.jpg" style="width: 50px; display: block; float: left;">
+                            <h4 style="float: left; line-height: 50px;">Email já está Cadastrado!</h4>
+                        </div>
+                        
+                        <?php
+                       
+                    }
+                }
         
         }
 
@@ -30,7 +52,8 @@ $p = new Pessoa("crudpdo","localhost","root","");
 
     <?php
 
-        if (isset($_GET['id_up'])) {
+        if (isset($_GET['id_up'])) //SE A PESSOA CLICAR EM EDITAR 
+        {
             
             $id_update  = addslashes($_GET['id_up']);
             $results = $p->buscarDadosPessoa($id_update);
@@ -84,7 +107,12 @@ $p = new Pessoa("crudpdo","localhost","root","");
                 }
             } else //Não existe cadastro no Banco de Dados
             {
-                echo "Ainda não há Pessoas Cdastradas!";
+                ?>
+                <div class="aviso">
+                    <h4>"Ainda não há Pessoas Cdastradas!"</h4>
+                </div>
+                
+                <?php
             }
             ?>   
         </table>
