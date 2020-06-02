@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 38</title>
+    <style>
+
+        p, input, h3 {
+            text-align: center;
+        }
+        input, button {
+            width: 25%;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h3>Entrar com quatro números e imprimir a média ponderada, sabendo-se que os
+        pesos são respectivamente: 1, 2, 3 e 4.</h3>
+    
+        <form action="atividade38.php" method="post">
+            <p>
+                <input type="number" name="nota1" placeholder="Insira a 1º Nota" required min="0" max="10">
+            </p>
+            <p>
+                <input type="number" name="nota2" placeholder="Insira a 2º Nota" required min="0" max="10">
+            </p>
+            <p>
+                <input type="number" name="nota3" placeholder="Insira a 3º Nota" required min="0" max="10">
+            </p>
+            <p>
+                <input type="number" name="nota4" placeholder="Insira a 4º Nota" required min="0" max="10" >
+            </p>
+            <p>
+                <button type="submit">Verificar Minha Nota</button>
+            </p>
+        </form>
+</body>
+</html>

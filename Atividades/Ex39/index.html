@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 39</title>
+    <style>
+        h3, p {
+            text-align: center;
+        }
+        input, button {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 25%;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h3>Entrar com um número no formato CDU e imprimir invertido: UDC. (Exemplo:
+        123, sairá 321).</h3>
+    
+    <form action="atividade39.php" method="post">
+        <p>
+            <input type="number" name="numero" placeholder="Insira um numero no Formato CDU" min="100" max="999" required>
+        </p>
+        <p>
+            <button type="submit">Inverter Número</button>
+        </p>
+    </form>
+</body>
+</html>
